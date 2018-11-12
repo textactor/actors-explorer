@@ -9,7 +9,7 @@ import {
 } from "@textactor/concept-domain";
 
 export interface DataExplorerApi {
-    newContainerExplorer(containerId: string, options: ContainerExplorerOptions): ContainerExplorer
+    createContainerExplorer(containerId: string, options: ContainerExplorerOptions): ContainerExplorer
 }
 
 export function createDataExplorerApi(
@@ -20,7 +20,7 @@ export function createDataExplorerApi(
     wikiTitleRep: WikiTitleRepository,
 ): DataExplorerApi {
     return {
-        newContainerExplorer(containerId: string, options: ContainerExplorerOptions) {
+        createContainerExplorer(containerId: string, options: ContainerExplorerOptions) {
             return new ContainerExplorer(containerId, options,
                 containerRep,
                 conceptRep,

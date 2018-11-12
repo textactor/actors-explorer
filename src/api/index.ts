@@ -5,8 +5,7 @@ export {
 } from './container-explorer';
 
 export {
-    INewDataContainer,
-    DataContainer,
-} from './data-container';
+    DataCollector,
+} from './data-collector';
 
 export * from './explorer';

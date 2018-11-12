@@ -4,22 +4,22 @@
 import { parse } from 'concepts-parser';
 import { PushContextConcepts } from "../usecases/actions/push-context-concepts";
 import { KnownNameService } from "@textactor/known-names";
-import { ConceptContainerRepository, ConceptRepository, ConceptContainerHelper, ConceptContainerStatus, ConceptHelper } from '@textactor/concept-domain';
+import { ConceptContainerRepository, ConceptRepository, ConceptContainerHelper, ConceptContainerStatus, ConceptHelper, ConceptContainer } from '@textactor/concept-domain';
 
-export interface DataContainerApi {
-    newDataContainer(data: NewDataContainer): Promise<INewDataContainer>
-    findDataContainer(data: FindDataContainer): Promise<DataContainer[]>
+export interface DataCollectorApi {
+    createCollector(data: NewContainerParams): Promise<DataCollector>
+    findConceptContainer(data: FindContainerParams): Promise<ConceptContainer[]>
 }
 
 export function createDataContainerApi(containerRep: ConceptContainerRepository, conceptRep: ConceptRepository)
-    : DataContainerApi {
+    : DataCollectorApi {
 
     const knownNames = new KnownNameService();
 
     const pushConcepts = new PushContextConcepts(conceptRep, knownNames);
 
     return {
-        async newDataContainer(data: NewDataContainer): Promise<INewDataContainer> {
+        async createCollector(data: NewContainerParams): Promise<DataCollector> {
             const container = await containerRep.create(ConceptContainerHelper.build(data));
 
             return {
@@ -27,6 +27,7 @@ export function createDataContainerApi(containerRep: ConceptContainerRepository,
                 async pushText(text: string): Promise<void> {
                     if (container.status === ConceptContainerStatus.NEW) {
                         await containerRep.update({ id: container.id, set: { status: ConceptContainerStatus.COLLECTING } });
+                        container.status = ConceptContainerStatus.COLLECTING;
                     }
                     const context = {
                         text,
@@ -49,25 +50,28 @@ export function createDataContainerApi(containerRep: ConceptContainerRepository,
 
                     await pushConcepts.execute(concepts);
                 },
+
                 async pushTextNames(names: string[]): Promise<void> {
                     const concepts = names.map(name => {
                         return ConceptHelper.build({
                             name, lang: container.lang,
                             country: container.country,
                             containerId: container.id,
+                            popularity: 1,
                         });
                     }).filter(item => ConceptHelper.isValid(item));
 
                     await pushConcepts.execute(concepts);
 
                 },
+                
                 async end(): Promise<void> {
                     container.status = ConceptContainerStatus.COLLECT_DONE;
                     await containerRep.update({ id: container.id, set: { status: ConceptContainerStatus.COLLECT_DONE } });
                 }
             }
         },
-        findDataContainer(data: FindDataContainer): Promise<DataContainer[]> {
+        findConceptContainer(data: FindContainerParams): Promise<ConceptContainer[]> {
             return containerRep.list(data);
         }
     }
@@ -75,7 +79,7 @@ export function createDataContainerApi(containerRep: ConceptContainerRepository,
 
 //--------- Find Data Container
 
-export type FindDataContainer = {
+export type FindContainerParams = {
     lang: string
     country: string
     limit: number
@@ -85,27 +89,9 @@ export type FindDataContainer = {
     uniqueName?: string
 }
 
-export type DataContainer = {
-    id: string
-    lang: string
-    country: string
-
-    name: string
-    uniqueName: string
-
-    ownerId: string
-
-    status: ConceptContainerStatus
-
-    lastError?: string
-
-    createdAt?: number
-    updatedAt?: number
-}
-
 //--------- New Data Container
 
-export type NewDataContainer = {
+export type NewContainerParams = {
     name: string
     uniqueName: string
     ownerId: string
@@ -113,9 +99,9 @@ export type NewDataContainer = {
     country: string
 }
 
-export interface INewDataContainer {
+export interface DataCollector {
     pushText(text: string): Promise<void>
     pushTextNames(names: string[]): Promise<void>
     end(): Promise<void>
-    container(): DataContainer
+    container(): ConceptContainer
 }

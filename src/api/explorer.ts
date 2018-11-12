@@ -1,4 +1,4 @@
-import { DataContainerApi, createDataContainerApi } from "./data-container";
+import { DataCollectorApi, createDataContainerApi } from "./data-collector";
 import { DataExplorerApi, createDataExplorerApi } from "./data-explorer";
 import {
     ConceptContainerRepository,
@@ -9,7 +9,7 @@ import {
 } from "@textactor/concept-domain";
 
 
-export interface ExplorerApi extends DataContainerApi, DataExplorerApi {
+export interface ExplorerApi extends DataCollectorApi, DataExplorerApi {
     // closeDatabase(): Promise<void>
 }
 
