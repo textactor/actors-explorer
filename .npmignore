@@ -1,0 +1,7 @@
+
+*.test.js
+src/
+tsconfig.json
+.travis.yml
+package-lock.json
+yarn.lock

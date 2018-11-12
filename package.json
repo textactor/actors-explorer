@@ -1,0 +1,57 @@
+{
+  "name": "@textactor/actors-explorer",
+  "version": "0.1.0",
+  "description": "A nodejs module for exploring TextActors(Named entities) in texts.",
+  "main": "./dest/index.js",
+  "types": "./dest/index.d.ts",
+  "scripts": {
+    "pretest": "npm run clean && npm run tsc",
+    "test": "ava --no-cache --verbose dest/**/*.test.js",
+    "posttest": "npm run clean-test-code",
+    "tsc": "tsc",
+    "tscw": "tsc -w",
+    "preversion": "npm run tsc",
+    "postversion": "git push --follow-tags",
+    "prepublishOnly": "npm run tsc && npm run clean-test-code",
+    "clean": "rimraf ./dest",
+    "clean-test-code": "rimraf ./dest/**/*.test.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/textactor/actors-explorer.git"
+  },
+  "keywords": [
+    "textactor",
+    "actors-explorer"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/textactor/actors-explorer/issues"
+  },
+  "homepage": "https://github.com/textactor/actors-explorer#readme",
+  "devDependencies": {
+    "@types/boom": "^7.2.1",
+    "@types/ms": "^0.7.30",
+    "@types/node": "^10.12.5",
+    "@types/shortid": "^0.0.29",
+    "ava": "^0.25.0",
+    "rimraf": "^2.6.2",
+    "typescript": "3.1.6"
+  },
+  "dependencies": {
+    "atonic": "^1.0.4",
+    "boom": "^7.2.2",
+    "concepts-parser": "^1.4.1",
+    "entity-finder": "^0.5.2",
+    "partial-name": "^0.1.4",
+    "same-names": "^0.2.0",
+    "shortid": "^2.2.14",
+    "standard-text": "^0.1.1",
+    "text-country": "^0.1.1",
+    "wiki-entity": "^0.4.1"
+  }
+}
