@@ -5,7 +5,7 @@ import { UseCase } from '../usecase';
 import { IKnownNameService } from '../../services/known-names-service';
 import getSameNames from 'same-names';
 import { Concept, ConceptRepository, ConceptHelper, CreateOrUpdateConcept } from '@textactor/concept-domain';
-import { uniq } from '@textactor/domain';
+import { uniq, mapPromise } from '@textactor/domain';
 
 export class PushContextConcepts extends UseCase<Concept[], Concept[], void> {
     private createOrUpdateConcept: CreateOrUpdateConcept;
@@ -21,12 +21,9 @@ export class PushContextConcepts extends UseCase<Concept[], Concept[], void> {
         concepts = concepts.filter(concept => ConceptHelper.isValid(concept));
         setSameIds(concepts);
 
-        const newConcepts: Concept[] = [];
-        for (const concept of concepts) {
-            newConcepts.push(await this.pushConcept(concept));
-        }
+        const result = await mapPromise(concepts, concept => this.pushConcept(concept));
 
-        return newConcepts;
+        return Array.from(result.values());
     }
 
     private async pushConcept(concept: Concept): Promise<Concept> {

@@ -1,5 +1,5 @@
 
-// const debug = require('debug')('textactor:actors-explorer');
+const debug = require('debug')('textactor:actors-explorer');
 
 import { parse } from 'concepts-parser';
 import { PushContextConcepts } from "../usecases/actions/push-context-concepts";
@@ -26,6 +26,7 @@ export function createDataContainerApi(containerRep: ConceptContainerRepository,
                 container() { return container },
                 async pushText(text: string): Promise<void> {
                     if (container.status === ConceptContainerStatus.NEW) {
+                        debug(`settings container status to COLLECTING`)
                         await containerRep.update({ id: container.id, set: { status: ConceptContainerStatus.COLLECTING } });
                         container.status = ConceptContainerStatus.COLLECTING;
                     }
