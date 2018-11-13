@@ -36,22 +36,25 @@
   "devDependencies": {
     "@types/boom": "^7.2.1",
     "@types/ms": "^0.7.30",
-    "@types/node": "^10.12.5",
+    "@types/node": "^10.12.6",
     "@types/shortid": "^0.0.29",
     "ava": "^0.25.0",
     "rimraf": "^2.6.2",
     "typescript": "3.1.6"
   },
   "dependencies": {
+    "@textactor/concept-domain": "^0.2.0",
+    "@textactor/domain": "^0.2.0",
+    "@textactor/known-names": "^0.1.1",
     "atonic": "^1.0.4",
     "boom": "^7.2.2",
-    "concepts-parser": "^1.4.1",
+    "concepts-parser": "^1.5.0",
     "entity-finder": "^0.5.2",
     "partial-name": "^0.1.4",
     "same-names": "^0.2.0",
     "shortid": "^2.2.14",
     "standard-text": "^0.1.1",
     "text-country": "^0.1.1",
-    "wiki-entity": "^0.4.1"
+    "wiki-entity": "^0.4.2"
   }
 }
