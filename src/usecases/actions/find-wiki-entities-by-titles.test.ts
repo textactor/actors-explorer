@@ -1,7 +1,7 @@
 
 import { FindWikiEntitiesByTitles } from './find-wiki-entities-by-titles';
 import test from 'ava';
-import { IKnownNameService } from '../../services/known-names-service';
+import { KnownNameService } from '../../services/known-names-service';
 
 test('ro-md', async t => {
     const finder = new FindWikiEntitiesByTitles({ lang: 'ro', country: 'md' }, new KnownNamesService());
@@ -13,7 +13,7 @@ test('ro-md', async t => {
     t.true(Object.keys(ilanShorEntities[0].links).length > 1);
 });
 
-class KnownNamesService implements IKnownNameService {
+class KnownNamesService implements KnownNameService {
     getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
         return null;
     }

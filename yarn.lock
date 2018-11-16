@@ -78,11 +78,6 @@
     joi "^14.0.4"
     standard-text "^0.1.1"
 
-"@textactor/known-names@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@textactor/known-names/-/known-names-0.1.1.tgz#2b8eff084564474afb9db1e8e6aba36aaa084303"
-  integrity sha512-unm4HBcL72MOuSdixEe1mUAGXVc4TGQ2hvmqAL/0OCktk1OWPN/9Dln2nHSADLNov+Geai4kKkbK7bQcAbym0g==
-
 "@types/boom@^7.2.1":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@types/boom/-/boom-7.2.1.tgz#a21e21ba08cc49d17b26baef98e1a77ee4d6cdb0"

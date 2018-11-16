@@ -2,9 +2,9 @@
 import test from 'ava';
 import { PopularConceptNamesEnumerator } from './popular-concept-names-enumerator';
 import { PushContextConcepts } from '../usecases/actions/push-context-concepts';
-import { KnownNameService } from '@textactor/known-names';
 import { MemoryConceptRepository } from '@textactor/concept-domain/dest/repositories/memory';
 import { ConceptContainerHelper, ConceptHelper } from '@textactor/concept-domain';
+import { KnownNameService } from './known-names-service';
 
 
 test('empty list', async t => {
@@ -41,7 +41,7 @@ test('names with root name', async t => {
 
     const conceptRep = new MemoryConceptRepository();
 
-    const pushConcepts = new PushContextConcepts(conceptRep, new KnownNameService());
+    const pushConcepts = new PushContextConcepts(conceptRep, new LocalKnownNamesService());
 
     await pushConcepts.execute([
         ConceptHelper.build({ containerId, lang, country, name: 'Maia Sandu' }),
@@ -95,7 +95,7 @@ test('mutable', async t => {
 
     const conceptRep = new MemoryConceptRepository();
 
-    const pushConcepts = new PushContextConcepts(conceptRep, new KnownNameService());
+    const pushConcepts = new PushContextConcepts(conceptRep, new LocalKnownNamesService());
 
     await pushConcepts.execute([
         ConceptHelper.build({ containerId, lang, country, name: 'Maia Sandu' }),
@@ -129,3 +129,10 @@ test('mutable', async t => {
 
     t.is(enumerator.atEnd(), true);
 });
+
+class LocalKnownNamesService implements KnownNameService {
+    getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
+        return null;
+    }
+}
+

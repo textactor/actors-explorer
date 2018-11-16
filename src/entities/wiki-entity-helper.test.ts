@@ -1,7 +1,7 @@
 
 import test from 'ava';
 import { getEntities } from 'wiki-entity';
-import { IKnownNameService } from '../services/known-names-service';
+import { KnownNameService } from '../services/known-names-service';
 import { WikiEntityBuilder } from '../usecases/actions/wiki-entity-builder';
 import { WikiEntityHelper, WikiEntityType } from '@textactor/concept-domain';
 import { NameHelper } from '@textactor/domain';
@@ -121,7 +121,7 @@ test('#isNotActual', async t => {
     t.is(WikiEntityHelper.isNotActual(entity), true);
 })
 
-class KnownNamesService implements IKnownNameService {
+class KnownNamesService implements KnownNameService {
     getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
         return null;
     }

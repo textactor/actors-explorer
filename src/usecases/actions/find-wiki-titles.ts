@@ -6,11 +6,12 @@ import { findTitles } from 'entity-finder';
 import { delay, isTimeoutError } from "../../utils";
 import { UseCase } from "../usecase";
 import { uniq } from "@textactor/domain";
+import { CountryTagsService } from "../../services/country-tags-service";
 
 export class FindWikiTitles extends UseCase<string[], string[], null> {
 
     private tags: string[]
-    constructor(private locale: ILocale, countryTags: ICountryTagsService) {
+    constructor(private locale: ILocale, countryTags: CountryTagsService) {
         super()
         this.tags = countryTags.getTags(locale.country, locale.lang);
     }
@@ -56,8 +57,4 @@ export class FindWikiTitles extends UseCase<string[], string[], null> {
 
         return uniq(allTitles);
     }
-}
-
-export interface ICountryTagsService {
-    getTags(country: string, lang: string): string[]
 }

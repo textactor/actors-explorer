@@ -1,7 +1,7 @@
 
 const debug = require('debug')('textactor:actors-explorer');
 
-import { IKnownNameService } from "../../services/known-names-service";
+import { KnownNameService } from "../../services/known-names-service";
 import { WikiEntity as ExternWikiEntity, convertToSimpleEntity } from 'wiki-entity';
 import textCountry from 'text-country';
 import { ILocale } from "../../types";
@@ -19,7 +19,7 @@ export interface IWikiEntityBuilder {
 }
 
 export class WikiEntityBuilder implements IWikiEntityBuilder {
-    constructor(private locale: ILocale, private knownNamesService: IKnownNameService) { }
+    constructor(private locale: ILocale, private knownNamesService: KnownNameService) { }
 
     build({ wikiEntity }: WikiEntityBuilderData): WikiEntity {
         const lang = this.locale.lang.trim().toLowerCase();

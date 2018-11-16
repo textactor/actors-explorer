@@ -10,3 +10,7 @@ export {
 export {
     ActorHelper,
 } from './entities/actor-helper';
+
+export {
+    CountryTagsService,
+} from './services/country-tags-service';

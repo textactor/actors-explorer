@@ -9,8 +9,7 @@ import { DeleteInvalidConcepts } from './actions/delete-invalid-concepts';
 import { PopularConceptNamesEnumerator } from '../services/popular-concept-names-enumerator';
 import { DeleteActorConcepts } from './actions/delete-actor-concepts';
 import { CleanConceptContainer } from './actions/clean-concept-container';
-import { IKnownNameService } from '../services/known-names-service';
-import { ICountryTagsService } from './actions/find-wiki-titles';
+import { KnownNameService } from '../services/known-names-service';
 import {
     ConceptContainer,
     ConceptContainerRepository,
@@ -21,6 +20,7 @@ import {
     ConceptContainerHelper,
     ConceptContainerStatus,
 } from '@textactor/concept-domain';
+import { CountryTagsService } from '../services/country-tags-service';
 
 export interface ExploreContainerOptions extends DeleteUnpopularConceptsOptions {
 
@@ -34,8 +34,8 @@ export class ExploreContainer extends UseCase<OnGenerateActorCallback, void, Exp
         private entityRep: WikiEntityRepository,
         private wikiSearchNameRep: WikiSearchNameRepository,
         private wikiTitleRep: WikiTitleRepository,
-        private countryTags: ICountryTagsService,
-        private knownNames: IKnownNameService) {
+        private countryTags: CountryTagsService,
+        private knownNames: KnownNameService) {
         super()
 
         if (!container.lang || !container.country) {

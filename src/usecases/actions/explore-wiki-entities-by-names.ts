@@ -4,8 +4,8 @@ const debug = require('debug')('textactor:actors-explorer');
 import { ILocale } from '../../types';
 import { FindWikiEntitiesByTitles } from './find-wiki-entities-by-titles';
 import { SaveWikiEntities } from './save-wiki-entities';
-import { FindWikiTitles, ICountryTagsService } from './find-wiki-titles';
-import { IKnownNameService } from '../../services/known-names-service';
+import { FindWikiTitles } from './find-wiki-titles';
+import { KnownNameService } from '../../services/known-names-service';
 import { UseCase } from '../usecase';
 import ms = require('ms');
 import {
@@ -18,6 +18,7 @@ import {
     CreateOrUpdateWikiSearchName,
 } from '@textactor/concept-domain';
 import { uniq } from '@textactor/domain';
+import { CountryTagsService } from '../../services/country-tags-service';
 
 export class ExploreWikiEntitiesByNames extends UseCase<string[], string[], void> {
     private exploreWikiEntitiesByTitles: FindWikiEntitiesByTitles;
@@ -30,8 +31,8 @@ export class ExploreWikiEntitiesByNames extends UseCase<string[], string[], void
         entityRep: WikiEntityRepository,
         private wikiSearchNameRep: WikiSearchNameRepository,
         private wikiTitleRep: WikiTitleRepository,
-        countryTags: ICountryTagsService,
-        knownNames: IKnownNameService) {
+        countryTags: CountryTagsService,
+        knownNames: KnownNameService) {
         super();
 
         this.createOrUpdateWikiTitle = new CreateOrUpdateWikiTitle(wikiTitleRep);

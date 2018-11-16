@@ -45,7 +45,6 @@
   "dependencies": {
     "@textactor/concept-domain": "^0.2.0",
     "@textactor/domain": "^0.2.0",
-    "@textactor/known-names": "^0.1.1",
     "atonic": "^1.0.4",
     "boom": "^7.2.2",
     "concepts-parser": "^1.5.0",

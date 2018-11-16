@@ -3,8 +3,8 @@ const debug = require('debug')('textactor:actors-explorer');
 
 import { parse } from 'concepts-parser';
 import { PushContextConcepts } from "../usecases/actions/push-context-concepts";
-import { KnownNameService } from "@textactor/known-names";
 import { ConceptContainerRepository, ConceptRepository, ConceptContainerHelper, ConceptContainerStatus, ConceptHelper, ConceptContainer } from '@textactor/concept-domain';
+import { KnownNameService } from '../services/known-names-service';
 
 export interface DataCollectorApi {
     createCollector(data: NewContainerParams): Promise<DataCollector>
@@ -14,7 +14,7 @@ export interface DataCollectorApi {
 export function createDataContainerApi(containerRep: ConceptContainerRepository, conceptRep: ConceptRepository)
     : DataCollectorApi {
 
-    const knownNames = new KnownNameService();
+    const knownNames = new LocalKnownNamesService();
 
     const pushConcepts = new PushContextConcepts(conceptRep, knownNames);
 
@@ -106,3 +106,10 @@ export interface DataCollector {
     end(): Promise<void>
     container(): ConceptContainer
 }
+
+class LocalKnownNamesService implements KnownNameService {
+    getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
+        return null;
+    }
+}
+

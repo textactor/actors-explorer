@@ -2,7 +2,7 @@
 const debug = require('debug')('textactor:actors-explorer');
 
 import { UseCase } from '../usecase';
-import { IKnownNameService } from '../../services/known-names-service';
+import { KnownNameService } from '../../services/known-names-service';
 import getSameNames from 'same-names';
 import { Concept, ConceptRepository, ConceptHelper, CreateOrUpdateConcept } from '@textactor/concept-domain';
 import { uniq, mapPromise } from '@textactor/domain';
@@ -11,7 +11,7 @@ export class PushContextConcepts extends UseCase<Concept[], Concept[], void> {
     private createOrUpdateConcept: CreateOrUpdateConcept;
 
     constructor(conceptRep: ConceptRepository,
-        private knownNames: IKnownNameService) {
+        private knownNames: KnownNameService) {
         super()
 
         this.createOrUpdateConcept = new CreateOrUpdateConcept(conceptRep);

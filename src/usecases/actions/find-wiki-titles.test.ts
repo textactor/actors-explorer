@@ -1,6 +1,7 @@
 
-import { FindWikiTitles, ICountryTagsService } from './find-wiki-titles';
+import { FindWikiTitles } from './find-wiki-titles';
 import test from 'ava';
+import { CountryTagsService } from '../../services/country-tags-service';
 
 test('ro-md', async t => {
     const finder = new FindWikiTitles({ lang: 'ro', country: 'md' }, new CountryTags());
@@ -11,7 +12,7 @@ test('ro-md', async t => {
     t.is(ilanShorTitles[0], 'Ilan Șor');
 });
 
-class CountryTags implements ICountryTagsService {
+class CountryTags implements CountryTagsService {
     getTags(country: string, lang: string): string[] {
 
         const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } = {

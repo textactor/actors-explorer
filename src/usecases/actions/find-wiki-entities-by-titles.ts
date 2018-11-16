@@ -4,7 +4,7 @@ const debug = require('debug')('textactor:actors-explorer');
 import { ILocale } from "../../types";
 import { getEntities, WikiEntitiesParams, WikiEntity as ExternWikiEntity } from 'wiki-entity';
 import { isTimeoutError, delay } from "../../utils";
-import { IKnownNameService } from "../../services/known-names-service";
+import { KnownNameService } from "../../services/known-names-service";
 import { IWikiEntityBuilder, WikiEntityBuilder } from "./wiki-entity-builder";
 import { UseCase } from "../usecase";
 import { WikiEntity, WikiEntityHelper } from "@textactor/concept-domain";
@@ -13,7 +13,7 @@ import { uniq, uniqByProperty } from "@textactor/domain";
 export class FindWikiEntitiesByTitles extends UseCase<string[], WikiEntity[], null> {
     private wikiEntityBuilder: IWikiEntityBuilder
 
-    constructor(private locale: ILocale, knownNames: IKnownNameService) {
+    constructor(private locale: ILocale, knownNames: KnownNameService) {
         super()
         this.wikiEntityBuilder = new WikiEntityBuilder(locale, knownNames);
     }

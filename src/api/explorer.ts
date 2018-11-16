@@ -7,6 +7,8 @@ import {
     WikiSearchNameRepository,
     WikiTitleRepository,
 } from "@textactor/concept-domain";
+import { CountryTagsService } from "../services/country-tags-service";
+import { KnownNameService } from "../services/known-names-service";
 
 
 export interface ExplorerApi extends DataCollectorApi, DataExplorerApi {
@@ -19,6 +21,8 @@ export type ExplorerOptions = {
     entityRep: WikiEntityRepository
     searchNameRep: WikiSearchNameRepository
     wikiTitleRep: WikiTitleRepository
+    countryTagsService: CountryTagsService,
+    knownNameService: KnownNameService,
 }
 
 export function createExplorer(options: ExplorerOptions): ExplorerApi {
@@ -29,7 +33,9 @@ export function createExplorer(options: ExplorerOptions): ExplorerApi {
             options.conceptRep,
             options.entityRep,
             options.searchNameRep,
-            options.wikiTitleRep),
+            options.wikiTitleRep,
+            options.countryTagsService,
+            options.knownNameService),
         // closeDatabase() {
         //     return Promise.resolve();
         // }

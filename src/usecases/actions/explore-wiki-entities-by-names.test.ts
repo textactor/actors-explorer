@@ -7,9 +7,9 @@ import {
     MemoryWikiTitleRepository,
     MemoryWikiSearchNameRepository
 } from '@textactor/concept-domain/dest/repositories/memory';
-import { CountryTagsService } from '../../services/country-tags-service';
-import { KnownNameService } from '@textactor/known-names';
 import { Locale, WikiSearchNameHelper, WikiTitleHelper, WikiEntityHelper } from '@textactor/concept-domain';
+import { CountryTagsService } from '../../services/country-tags-service';
+import { KnownNameService } from '../../services/known-names-service';
 
 test('Moscow multi names', async t => {
     const locale: Locale = { lang: 'ru', country: 'ru' };
@@ -21,8 +21,8 @@ test('Moscow multi names', async t => {
         entityRepository,
         searchRepository,
         titleRepository,
-        new CountryTagsService(),
-        new KnownNameService()
+        new CountryTags(),
+        new LocalKnownNamesService()
     );
 
     const names = ["Москва", "Москвы", "Москве", "Москву", "Москвой"];
@@ -43,3 +43,32 @@ test('Moscow multi names', async t => {
     t.is(moscowEntity.length, 1);
     t.is(moscowEntity[0].name, 'Москва');
 });
+
+class CountryTags implements CountryTagsService {
+    getTags(country: string, lang: string): string[] {
+
+        const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } = {
+            md: {
+                ro: ['republica moldova', 'moldova'],
+            },
+            ro: {
+                ro: ['românia', 'româniei'],
+            },
+            ru: {
+                ru: ['Россия', 'РФ', 'России', 'Российской'],
+            },
+        }
+
+        if (LOCALE_COUNTRY_TAGS[country]) {
+            return LOCALE_COUNTRY_TAGS[country][lang];
+        }
+
+        return []
+    }
+}
+
+class LocalKnownNamesService implements KnownNameService {
+    getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
+        return null;
+    }
+}

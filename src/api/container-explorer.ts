@@ -2,9 +2,9 @@
 import { Actor } from "../entities/actor";
 import { notFound } from "boom";
 import { ExploreContainer, ExploreContainerOptions } from "../usecases/explore-container";
-import { CountryTagsService } from "../services/country-tags-service";
-import { KnownNameService } from "@textactor/known-names";
 import { WikiTitleRepository, WikiSearchNameRepository, WikiEntityRepository, ConceptRepository, ConceptContainerRepository } from "@textactor/concept-domain";
+import { CountryTagsService } from "../services/country-tags-service";
+import { KnownNameService } from "../services/known-names-service";
 
 export type OnDataCallback = (data: Actor) => Promise<void>;
 export type OnErrorCallback = (error: Error) => void;
@@ -35,6 +35,8 @@ export class ContainerExplorer implements ContainerExplorer {
         private entityRep: WikiEntityRepository,
         private searchNameRep: WikiSearchNameRepository,
         private wikiTitleRep: WikiTitleRepository,
+        private countryTags: CountryTagsService,
+        private knownNames: KnownNameService,
     ) {
 
     }
@@ -66,8 +68,8 @@ export class ContainerExplorer implements ContainerExplorer {
             this.entityRep,
             this.searchNameRep,
             this.wikiTitleRep,
-            new CountryTagsService(),
-            new KnownNameService()
+            this.countryTags,
+            this.knownNames,
         );
 
         await processConcepts.execute((actor: Actor) => this.emitData(actor), this.options);

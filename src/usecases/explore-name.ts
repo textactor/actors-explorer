@@ -4,12 +4,12 @@ const debug = require('debug')('textactor:actors-explorer');
 import { UseCase } from './usecase';
 import { ExploreWikiEntitiesByNames } from './actions/explore-wiki-entities-by-names';
 import { BuildActorByNames } from './actions/build-actor-by-names';
-import { IKnownNameService } from '../services/known-names-service';
+import { KnownNameService } from '../services/known-names-service';
 import { Actor } from '../entities/actor';
-import { ICountryTagsService } from './actions/find-wiki-titles';
 import { ILocale } from '../types';
 import { ActorNameCollection } from '../entities/actor-name-collection';
 import { WikiEntityRepository, WikiSearchNameRepository, WikiTitleRepository } from '@textactor/concept-domain';
+import { CountryTagsService } from '../services/country-tags-service';
 
 export class ExploreName extends UseCase<string | string[], Actor | null, void> {
     private actorBuilder: BuildActorByNames;
@@ -19,8 +19,8 @@ export class ExploreName extends UseCase<string | string[], Actor | null, void> 
         private entityRep: WikiEntityRepository,
         private wikiSearchNameRep: WikiSearchNameRepository,
         private wikiTitleRep: WikiTitleRepository,
-        private countryTags: ICountryTagsService,
-        private knownNames: IKnownNameService) {
+        private countryTags: CountryTagsService,
+        private knownNames: KnownNameService) {
         super()
 
         if (!locale.lang || !locale.country) {

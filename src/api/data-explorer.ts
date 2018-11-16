@@ -7,6 +7,8 @@ import {
     WikiSearchNameRepository,
     WikiTitleRepository,
 } from "@textactor/concept-domain";
+import { CountryTagsService } from "../services/country-tags-service";
+import { KnownNameService } from "../services/known-names-service";
 
 export interface DataExplorerApi {
     createContainerExplorer(containerId: string, options: ContainerExplorerOptions): ContainerExplorer
@@ -18,6 +20,8 @@ export function createDataExplorerApi(
     entityRep: WikiEntityRepository,
     searchNameRep: WikiSearchNameRepository,
     wikiTitleRep: WikiTitleRepository,
+    countryTagsService: CountryTagsService,
+    knownNameService: KnownNameService,
 ): DataExplorerApi {
     return {
         createContainerExplorer(containerId: string, options: ContainerExplorerOptions) {
@@ -26,7 +30,10 @@ export function createDataExplorerApi(
                 conceptRep,
                 entityRep,
                 searchNameRep,
-                wikiTitleRep);
+                wikiTitleRep,
+                countryTagsService,
+                knownNameService,
+            );
         }
     }
 }

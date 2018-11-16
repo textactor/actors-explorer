@@ -7,9 +7,9 @@ import {
     MemoryWikiSearchNameRepository,
     MemoryWikiTitleRepository,
 } from '@textactor/concept-domain/dest/repositories/memory';
-import { ICountryTagsService } from './actions/find-wiki-titles';
-import { IKnownNameService } from '../services/known-names-service';
+import { KnownNameService } from '../services/known-names-service';
 import { ConceptContainerHelper } from '@textactor/concept-domain';
+import { CountryTagsService } from '../services/country-tags-service';
 
 
 
@@ -118,7 +118,7 @@ test(`ro-md: Ministerul Afacerilor Externe`, async t => {
 });
 
 
-class CountryTags implements ICountryTagsService {
+class CountryTags implements CountryTagsService {
     getTags(country: string, lang: string): string[] {
 
         const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } = {
@@ -141,7 +141,7 @@ class CountryTags implements ICountryTagsService {
     }
 }
 
-class KnownNamesService implements IKnownNameService {
+class KnownNamesService implements KnownNameService {
     getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
         return null;
     }
