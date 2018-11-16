@@ -14,3 +14,7 @@ export {
 export {
     CountryTagsService,
 } from './services/country-tags-service';
+
+export {
+    KnownNameService,
+} from './services/known-names-service';
