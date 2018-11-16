@@ -6,6 +6,7 @@ import { ILocale } from '../types';
 import { KnownNameService } from '../services/known-names-service';
 import { WikiEntityBuilder } from '../usecases/actions/wiki-entity-builder';
 import { ActorNameCollection } from './actor-name-collection';
+import { ActorName } from './actor';
 
 
 test('#buildNames', t => {
@@ -47,6 +48,74 @@ test('#validate', t => {
     t.throws(() => ActorHelper.validate({ name: 'n', lang: 'ro', country: 'ro' }), /invalid name:/);
     t.throws(() => ActorHelper.validate({ name: 'name', lang: 'ro', country: 'ro' }), /no names/);
     t.throws(() => ActorHelper.validate({ name: 'name', names: ActorNameCollection.fromArray(['n'], 'ro').list(), lang: 'ro', country: 'ro' }), /no names/);
+});
+
+test('#findCommonName', t => {
+    const name = 'Referendumul pentru Iesirea Marii Britanii';
+
+    let names: ActorName[] = [
+        {
+            name: 'Referendumul pentru Marii Britanii',
+            popularity: 9,
+            isAbbr: false,
+            type: 'SAME',
+        },
+        {
+            name: 'Referendumul pentru Iesirea Marii Britanii',
+            popularity: 2,
+            isAbbr: false,
+            type: 'WIKI',
+        }
+    ]
+    t.is(ActorHelper.findCommonName(name, names), null);
+
+    names = [
+        {
+            name: 'Brexit',
+            popularity: 4,
+            isAbbr: false,
+            type: 'SAME',
+        },
+        {
+            name: 'Referendumul pentru Iesirea Marii Britanii',
+            popularity: 2,
+            isAbbr: false,
+            type: 'WIKI',
+        }
+    ]
+    t.is(ActorHelper.findCommonName(name, names), null);
+
+    names = [
+        {
+            name: 'BREXIT',
+            popularity: 15,
+            isAbbr: true,
+            type: 'SAME',
+        },
+        {
+            name: 'Referendumul pentru Iesirea Marii Britanii',
+            popularity: 2,
+            isAbbr: false,
+            type: 'WIKI',
+        }
+    ]
+    t.is(ActorHelper.findCommonName(name, names), null);
+
+    names = [
+        {
+            name: 'Brexit',
+            popularity: 15,
+            isAbbr: false,
+            type: 'SAME',
+        },
+        {
+            name: 'Referendumul pentru Iesirea Marii Britanii',
+            popularity: 2,
+            isAbbr: false,
+            type: 'WIKI',
+        }
+    ]
+    t.is(ActorHelper.findCommonName(name, names), 'Brexit');
 });
 
 

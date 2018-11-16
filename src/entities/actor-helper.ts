@@ -57,17 +57,27 @@ export class ActorHelper {
             return null;
         }
 
-        const popularName = names.find(item => !item.isAbbr && item.popularity > 1 && ActorHelper.isValidCommonName(item.name));
+        const mainName = names.find(item => item.name === name);
+        if (!mainName) {
+            return false;
+        }
+
+        const popularName = names.find(item =>
+            !item.isAbbr
+            && item.popularity > 1
+            && ActorHelper.isValidCommonName(item.name)
+            && item.name.length > 5
+        );
 
         if (!popularName || popularName.popularity < 10) {
             return null;
         }
 
-        const popularNameCountWords = NameHelper.countWords(names[0].name);
-
-        if (popularNameCountWords < 2) {
+        if (mainName.popularity * 2 > popularName.popularity) {
             return null;
         }
+
+        const popularNameCountWords = NameHelper.countWords(names[0].name);
 
         if (nameCountWords <= popularNameCountWords) {
             return null;
