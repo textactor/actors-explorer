@@ -1061,10 +1061,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-concepts-parser@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/concepts-parser/-/concepts-parser-1.5.0.tgz#9e8f3cc54ca5f715a8f2ea7cc0453084f3dd76a1"
-  integrity sha512-DaboDQQ0DSzWGDtFKD1WV80ylcu7/f0UGI3oB74urC4OdWjx5ZVcNIxVsN0SGAHA/ZHykIjeB8Gq74rrjd9HDQ==
+concepts-parser@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/concepts-parser/-/concepts-parser-1.5.2.tgz#eedf1e7bc1fdfd44843191e9404899c45a731af8"
+  integrity sha512-1G6NNw2YZIzinS/VCyDngf7O1i1vJG7BnwF0UEFhlc2IMv0GzmxB+lq8iKolSKUhj3QzFlKtFot7iJtC1i8HeA==
   dependencies:
     atonic "^1.x.x"
 
