@@ -63,9 +63,9 @@ export class ActorNameCollection {
             if (item.knownName) {
                 collection.add({ name: item.knownName, type: 'SAME', popularity: item.popularity, isKnown: true });
             }
-            if (item.abbr) {
-                collection.add({ name: item.abbr, type: 'SAME', popularity: item.popularity, isKnown: false });
-            }
+            // if (item.abbr) {
+            //     collection.add({ name: item.abbr, type: 'SAME', popularity: item.popularity, isKnown: false });
+            // }
             collection.add({ name: item.name, type: 'SAME', popularity: item.popularity, isKnown: false });
         }
 

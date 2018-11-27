@@ -1,4 +1,6 @@
 
+// const debug = require('debug')('textactor:actors-explorer');
+
 import { UseCase } from "../usecase";
 import { ConceptContainer, ConceptRepository, ConceptHelper } from "@textactor/concept-domain";
 
@@ -11,6 +13,8 @@ export class DeleteActorConcepts extends UseCase<string[], void, void> {
     }
 
     protected async innerExecute(names: string[]): Promise<void> {
+
+        // debug(`deleting names: ${names}`)
 
         const lang = this.container.lang;
         const country = this.container.country;

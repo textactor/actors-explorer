@@ -11,10 +11,8 @@ export interface DataCollectorApi {
     findConceptContainer(data: FindContainerParams): Promise<ConceptContainer[]>
 }
 
-export function createDataContainerApi(containerRep: ConceptContainerRepository, conceptRep: ConceptRepository)
+export function createDataContainerApi(containerRep: ConceptContainerRepository, conceptRep: ConceptRepository, knownNames: KnownNameService)
     : DataCollectorApi {
-
-    const knownNames = new LocalKnownNamesService();
 
     const pushConcepts = new PushContextConcepts(conceptRep, knownNames);
 
@@ -106,10 +104,3 @@ export interface DataCollector {
     end(): Promise<void>
     container(): ConceptContainer
 }
-
-class LocalKnownNamesService implements KnownNameService {
-    getKnownName(_name: string, _lang: string, _country: string): { name: string; countryCodes?: string[]; } | null {
-        return null;
-    }
-}
-

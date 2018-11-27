@@ -27,7 +27,7 @@ export type ExplorerOptions = {
 
 export function createExplorer(options: ExplorerOptions): ExplorerApi {
     const api: ExplorerApi = {
-        ...createDataContainerApi(options.containerRep, options.conceptRep),
+        ...createDataContainerApi(options.containerRep, options.conceptRep, options.knownNameService),
         ...createDataExplorerApi(
             options.containerRep,
             options.conceptRep,
