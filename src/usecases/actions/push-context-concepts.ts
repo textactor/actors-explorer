@@ -27,13 +27,13 @@ export class PushContextConcepts extends UseCase<Concept[], Concept[], void> {
     }
 
     private async pushConcept(concept: Concept): Promise<Concept> {
-        ConceptHelper.setRootIds(concept);
-
         const knownName = this.knownNames.getKnownName(concept.name, concept.lang, concept.country);
         if (knownName && knownName.name) {
             concept.knownName = knownName.name;
             debug(`set concept known name: ${concept.name}=>${concept.knownName}`);
         }
+
+        ConceptHelper.setRootIds(concept);
 
         return await this.createOrUpdateConcept.execute(concept);
     }

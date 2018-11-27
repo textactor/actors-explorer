@@ -65,7 +65,7 @@ export class SelectWikiEntity extends UseCase<string[], WikiEntity | null, void>
 
         const topEntity = entities[0];
 
-        if (topEntity.countryCodes && topEntity.countryCodes.indexOf(this.locale.country) > -1) {
+        if (topEntity.countryCodes && topEntity.countryCodes.includes(this.locale.country)) {
             debug(`Top entity has country=${this.locale.country}: ${topEntity.name}`);
             return uniqByProperty(entities, 'id');
         }
@@ -99,7 +99,7 @@ export class SelectWikiEntity extends UseCase<string[], WikiEntity | null, void>
         if (!entities.length) {
             return entities;
         }
-        return entities.filter(item => item.countryCodes && item.countryCodes.indexOf(this.locale.country) > -1);
+        return entities.filter(item => item.countryCodes && item.countryCodes.includes(this.locale.country));
     }
 }
 
@@ -111,8 +111,4 @@ function sortEntities(entities: WikiEntity[]) {
     entities = entities.sort((a, b) => b.rank - a.rank);
 
     return entities;
-    // const typeEntities = entities.filter(item => !!item.type);
-    // const notTypeEntities = entities.filter(item => !item.type);
-
-    // return typeEntities.concat(notTypeEntities);
 }

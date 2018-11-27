@@ -2,7 +2,7 @@ import { ActorNameType, ActorName } from "./actor";
 import { NameHelper } from "@textactor/domain";
 import { Concept } from "@textactor/concept-domain";
 
-type ActorNameCollectionItem = ActorName & { id: string, order: number };
+type ActorNameCollectionItem = ActorName & { id: string, order: number, isKnown: boolean };
 
 export class ActorNameCollection {
     private map: { [id: string]: ActorNameCollectionItem } = {}
@@ -13,7 +13,7 @@ export class ActorNameCollection {
         return Object.keys(this.map).length;
     }
 
-    add({ name, popularity, type }: { name: string, popularity: number, type: ActorNameType }) {
+    add({ name, popularity, type, isKnown }: { name: string, popularity: number, type: ActorNameType, isKnown?: boolean }) {
         name = name.trim();
         const id = NameHelper.normalizeName(name, this.lang);
         if (name.length < 2 || id.length < 2) {
@@ -29,7 +29,7 @@ export class ActorNameCollection {
             }
         } else {
             const isAbbr = NameHelper.isAbbr(name);
-            this.map[id] = { name, popularity, id, type, isAbbr, order: this.length };
+            this.map[id] = { name, popularity, id, type, isAbbr, order: this.length, isKnown: isKnown === true };
         }
 
         return this;
@@ -61,12 +61,12 @@ export class ActorNameCollection {
 
         for (const item of concepts) {
             if (item.knownName) {
-                collection.add({ name: item.knownName, type: 'SAME', popularity: item.popularity });
+                collection.add({ name: item.knownName, type: 'SAME', popularity: item.popularity, isKnown: true });
             }
             if (item.abbr) {
-                collection.add({ name: item.abbr, type: 'SAME', popularity: item.popularity });
+                collection.add({ name: item.abbr, type: 'SAME', popularity: item.popularity, isKnown: false });
             }
-            collection.add({ name: item.name, type: 'SAME', popularity: item.popularity });
+            collection.add({ name: item.name, type: 'SAME', popularity: item.popularity, isKnown: false });
         }
 
         return collection;
@@ -75,7 +75,7 @@ export class ActorNameCollection {
     static fromArray(names: string[], lang: string, type: ActorNameType = 'SAME', popularity: number = 1) {
         const collection = new ActorNameCollection(lang);
         for (const name of names) {
-            collection.add({ name, popularity, type });
+            collection.add({ name, popularity, type, isKnown: false });
         }
 
         return collection;
@@ -83,7 +83,7 @@ export class ActorNameCollection {
 
     addArray(names: string[], type: ActorNameType = 'SAME', popularity: number = 1) {
         for (const name of names) {
-            this.add({ name, popularity, type });
+            this.add({ name, popularity, type, isKnown: false });
         }
 
         return this;
