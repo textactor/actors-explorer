@@ -2179,6 +2179,11 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+iso-639-2@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/iso-639-2/-/iso-639-2-1.1.0.tgz#d2d00a9aef5ddd05377e3ce95a652009d56bce29"
+  integrity sha512-Mv2ZSexyevr/kC5PMaOKWjPavAKStwRD9RkL9ldJFtyQhbfVPLLBFf3F+eOdknzRhUohhC8Fu7zPH+mypifFtA==
+
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
@@ -3715,10 +3720,13 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-text-country@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/text-country/-/text-country-0.1.1.tgz#79980473d81250d28eff8135d595fa7f34031a2c"
-  integrity sha512-KBRJjjN0lLsAdiQ05wEI8FCRpXGWw5tpoJAAObY3aSmLh/LPQPEmUuNeXYS4w+KTpoHwnnYSaedirHbgAUYuig==
+text-country@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/text-country/-/text-country-0.1.2.tgz#4d31985d12e91fe8db8ae36493d7dee00add1d3a"
+  integrity sha512-8FNyF9fZRKgV/h18y7KuBRWby6bZGm3w6yjAto93Awme8e/ywK2O7eExxh2x9E4KmeCihGmNidjFGHsdI4hTlg==
+  dependencies:
+    iso-639-2 "^1.1.0"
+    unicode-wb "^1.0.0"
 
 text-table@^0.2.0:
   version "0.2.0"
@@ -3824,6 +3832,11 @@ uid2@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
   integrity sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I=
+
+unicode-wb@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/unicode-wb/-/unicode-wb-1.0.0.tgz#340ea643297f15fcef467b7a3389f3ba139b87ce"
+  integrity sha512-y/JMmX9hnuF/3gOjkACCYAYbIQVx8MQunAJ8hl5sIEvmExRQgmhCuTfzACVlLmorspynIoZKarO0lYRqhIislA==
 
 union-value@^1.0.0:
   version "1.0.0"
