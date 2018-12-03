@@ -1,6 +1,6 @@
 {
   "name": "@textactor/actors-explorer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A nodejs module for exploring TextActors(Named entities) in texts.",
   "main": "./dest/index.js",
   "types": "./dest/index.d.ts",
