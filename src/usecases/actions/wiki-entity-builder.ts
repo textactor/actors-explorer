@@ -44,13 +44,15 @@ export class WikiEntityBuilder implements IWikiEntityBuilder {
             // nameHash: WikiEntityHelper.nameHash(name, lang),
             lang: lang,
             description: simpleEntity.description,
-            aliases: uniq(wikiEntity.aliases || []).filter(item => item.trim().length > 1 && item.length <= 200),
+            aliases: uniq(wikiEntity.aliases || [])
+                .filter(item => item.trim().length > 1 && item.length <= 200)
+                .slice(0, 20),
             about: simpleEntity.about,
             wikiDataId: simpleEntity.wikiDataId as string,
             wikiPageId: simpleEntity.wikiPageId as number,
             wikiPageTitle: simpleEntity.wikiPageTitle as string,
             types: simpleEntity.types,
-            countryCodes: simpleEntity.countryCodes || [],
+            countryCodes: (simpleEntity.countryCodes || []).slice(0, 5),
             data: simpleEntity.data,
             categories: simpleEntity.categories,
             rank: 1,
@@ -59,6 +61,13 @@ export class WikiEntityBuilder implements IWikiEntityBuilder {
             createdAt,
             expiresAt,
         };
+
+        if (entity.categories) {
+            entity.categories = entity.categories.slice(0, 10);
+        }
+        if (entity.types) {
+            entity.types = entity.types.slice(0, 30);
+        }
 
         if (!entity.countryCodes.length) {
             const code = getCountryByTitle(filterStrings([entity.wikiPageTitle, entity.name]), lang);
