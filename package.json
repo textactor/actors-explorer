@@ -47,7 +47,7 @@
     "@textactor/domain": "^0.2.0",
     "atonic": "^1.0.4",
     "boom": "^7.2.2",
-    "concepts-parser": "^1.5.2",
+    "concepts-parser": "^1.5.3",
     "entity-finder": "^0.5.2",
     "partial-name": "^0.1.4",
     "same-names": "^0.2.0",
