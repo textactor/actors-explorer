@@ -44,7 +44,7 @@ export class WikiEntityBuilder implements IWikiEntityBuilder {
             // nameHash: WikiEntityHelper.nameHash(name, lang),
             lang: lang,
             description: simpleEntity.description,
-            aliases: uniq(wikiEntity.aliases || []),
+            aliases: uniq(wikiEntity.aliases || []).filter(item => item.trim().length > 1 && item.length <= 200),
             about: simpleEntity.about,
             wikiDataId: simpleEntity.wikiDataId as string,
             wikiPageId: simpleEntity.wikiPageId as number,
