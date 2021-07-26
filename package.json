@@ -1,6 +1,6 @@
 {
   "name": "@textactor/actors-explorer",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "A nodejs module for exploring TextActors(Named entities) in texts.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -34,26 +34,24 @@
   },
   "homepage": "https://github.com/textactor/actors-explorer#readme",
   "devDependencies": {
-    "@types/boom": "^7.2.1",
-    "@types/ms": "^0.7.30",
-    "@types/node": "^10.12.6",
+    "@types/node": "latest",
     "@types/shortid": "^0.0.29",
-    "ava": "^1.0.1",
-    "rimraf": "^2.6.2",
-    "typescript": "3.2.2"
+    "ava": "^3.15.0",
+    "rimraf": "^3.0.2",
+    "typescript": "4.3.5"
   },
   "dependencies": {
-    "@textactor/concept-domain": "^0.2.1",
-    "@textactor/domain": "^0.2.0",
+    "@textactor/concept-domain": "^0.3.0",
+    "@textactor/domain": "^0.3.0",
     "atonic": "^1.0.4",
-    "boom": "^7.2.2",
+    "@hapi/boom": "^9.1.2",
     "concepts-parser": "^1.5.4",
-    "entity-finder": "^0.5.2",
+    "entity-finder": "^0.6.2",
     "partial-name": "^0.1.4",
     "same-names": "^0.2.0",
-    "shortid": "^2.2.14",
+    "shortid": "^2.2.16",
     "standard-text": "^0.1.1",
     "text-country": "^0.1.2",
-    "wiki-entity": "^0.4.3"
+    "wiki-entity": "^0.4.4"
   }
 }
