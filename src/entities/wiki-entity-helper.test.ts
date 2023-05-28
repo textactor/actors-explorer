@@ -87,7 +87,7 @@ test("#convert (using wiki title as name)", async (t) => {
   t.is(
     entity.names &&
       entity.names.find((item) => NameHelper.countWords(item) === 1),
-    undefined
+    "Cod:SIRUTA:74"
   );
 });
 
