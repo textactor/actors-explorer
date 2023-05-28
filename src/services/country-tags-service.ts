@@ -1,4 +1,3 @@
-
 export interface CountryTagsService {
-    getTags(country: string, lang: string): string[]
+  getTags(country: string, lang: string): string[];
 }
