@@ -1,6 +1,6 @@
 {
   "name": "@textactor/actors-explorer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A nodejs module for exploring TextActors(Named entities) in texts.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -43,16 +43,16 @@
   },
   "dependencies": {
     "@hapi/boom": "^9.1.2",
-    "@textactor/concept-domain": "^0.3.1",
-    "@textactor/domain": "^0.3.1",
-    "atonic": "^1.0.4",
-    "concepts-parser": "^1.5.5",
-    "entity-finder": "^0.6.2",
-    "partial-name": "^0.1.4",
-    "same-names": "^0.2.0",
+    "@textactor/concept-domain": "^0.3.x",
+    "@textactor/domain": "^0.3.x",
+    "atonic": "^1.x.x",
+    "concepts-parser": "^1.5.x",
+    "entity-finder": "^0.6.x",
+    "partial-name": "^0.1.x",
+    "same-names": "^0.2.x",
     "shortid": "^2.2.16",
-    "standard-text": "^0.1.1",
+    "standard-text": "^0.1.x",
     "text-country": "^0.1.2",
-    "wiki-entity": "^0.5.11"
+    "wiki-entity": "^0.5.x"
   }
 }
